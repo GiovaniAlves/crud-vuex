@@ -1,26 +1,35 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div id="app">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Gerenciador de Tarefas</h1>
+                <p class="lead">Criando um gerenciador de tarefas com Vue JS, Axios e Vuex.</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="col-sm-12">
+                <TaskList />
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import {mapState} from 'vuex'
+import TaskList from "./components/TaskList"
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+    name: 'App',
+    components: {TaskList},
+    computed: {
+        ...mapState(['contador'])
+    },
+    created() {
+        console.log(this.$store.state.contador)
+    }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+
