@@ -1,4 +1,6 @@
-# crud-vuex
+# CRUD Vuex
+
+### Creating a task manager with Vue JS, Axios and Vuex.
 
 ## Project setup
 ```
@@ -20,5 +22,9 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Running JSON Server to serve a fake REST API
+Use the command below inside the db directory
+```
+npm start
+```
+
