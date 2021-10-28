@@ -5,7 +5,8 @@
         <button
             class="btn btn-sm mr-4"
             :class="cssClass"
-            :title="textButtonCompleted">
+            :title="textButtonCompleted"
+            @click="$emit('conclude', task)">
                 <i class="fa fa-check"></i>
         </button>
         <button

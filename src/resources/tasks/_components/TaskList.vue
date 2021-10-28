@@ -9,7 +9,7 @@
                 <button
                     class="btn btn-primary float-right"
                     @click="displayFormCreateTask">
-                    <i class="fa fa-plus mr-2"></i>
+                        <i class="fa fa-plus mr-2"></i>
                     <span>Criar</span>
                 </button>
             </div>
@@ -20,7 +20,8 @@
                 v-for="task in tasks"
                 :key="task.id"
                 :task="task"
-                @edit="selectTaskForEdit"/>
+                @edit="selectTaskForEdit"
+                @conclude="concludeTask({task: $event})"/>
         </ul>
 
         <p v-else>Nenhuma tarefa criada.</p>
@@ -39,7 +40,7 @@ import { createNamespacedHelpers } from "vuex"
 import TaskListItem from "./TaskListItem"
 import TaskSave from "./TaskSave"
 
-const {mapState} = createNamespacedHelpers('tasks')
+const { mapActions, mapState} = createNamespacedHelpers('tasks')
 
 export default {
     name: "TaskList",
@@ -47,19 +48,23 @@ export default {
         TaskSave,
         TaskListItem
     },
-    computed: {
-        ...mapState(['tasks']),
-    },
-    created() {
-        console.log(`Store: `, this.$store)
-    },
     data() {
         return {
             displayForm: false,
             selectedTask: undefined
         }
     },
+    computed: {
+        ...mapState(['tasks']),
+    },
+    created() {
+        this.readTasks()
+    },
     methods: {
+        ...mapActions([
+            'concludeTask',
+            'readTasks',
+        ]),
         displayFormCreateTask() {
             if (this.selectedTask) {
                 this.selectedTask = undefined
