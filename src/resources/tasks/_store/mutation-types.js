@@ -1,0 +1,4 @@
+export const CREATE_TASKS = 'CREATE_TASKS'
+export const DELETE_TASKS = 'DELETE_TASKS'
+export const READ_TASKS = 'READ_TASKS'
+export const UPDATE_TASKS = 'UPDATE_TASKS'
