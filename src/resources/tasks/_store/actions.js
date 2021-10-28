@@ -19,8 +19,8 @@ export default {
         const response = await TasksService.deleteTask(task.id)
         commit(types.DELETE_TASK, {task: response.data})
     },
-    readTasks: async ( { commit }) => {
+    listTasks: async ( { commit }) => {
         const response = await TasksService.getTasks()
-        commit(types.READ_TASKS, {tasks: response.data})
+        commit(types.LIST_TASKS, {tasks: response.data})
     }
 }

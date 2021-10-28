@@ -21,7 +21,8 @@
                 :key="task.id"
                 :task="task"
                 @edit="selectTaskForEdit"
-                @conclude="concludeTask({task: $event})"/>
+                @conclude="concludeTask({task})"
+                @delete="confirmTaskRemoval"/>
         </ul>
 
         <p v-else>Nenhuma tarefa criada.</p>
@@ -58,13 +59,19 @@ export default {
         ...mapState(['tasks']),
     },
     created() {
-        this.readTasks()
+        this.listTasks()
     },
     methods: {
         ...mapActions([
             'concludeTask',
+            'listTasks',
             'readTasks',
         ]),
+        confirmTaskRemoval(task){
+            const confirm = window.confirm(`Deseja realmente deletar a tarefa ${task.title}?`)
+            if (confirm)
+                this.deleteTask({task})
+        },
         displayFormCreateTask() {
             if (this.selectedTask) {
                 this.selectedTask = undefined

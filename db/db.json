@@ -3,17 +3,7 @@
     {
       "id": 1,
       "title": "Aprender Vue",
-      "concluded": false
-    },
-    {
-      "id": 2,
-      "title": "Aprender Vuex",
-      "concluded": false
-    },
-    {
-      "id": 3,
-      "title": "Aprender Vue Router",
-      "concluded": false
+      "concluded": true
     }
   ]
 }

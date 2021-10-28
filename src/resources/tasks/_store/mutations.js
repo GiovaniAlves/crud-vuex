@@ -1,7 +1,7 @@
 import {
     CREATE_TASK,
     DELETE_TASK,
-    READ_TASKS,
+    LIST_TASKS,
     UPDATE_TASK
 } from "./mutation-types"
 
@@ -18,7 +18,7 @@ export default {
         const index = state.tasks.findIndex(t => t.id === task.id)
         state.tasks.splice(index, 1)
     },
-    [READ_TASKS]: (state, {tasks}) => {
+    [LIST_TASKS]: (state, {tasks}) => {
         /*Recebendo as tarefas da Fake API*/
         state.tasks = tasks
     }

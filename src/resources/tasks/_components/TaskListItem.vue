@@ -17,7 +17,8 @@
         </button>
         <button
             class="btn btn-danger btn-sm"
-            title="Deletar">
+            title="Deletar"
+            @click="$emit('delete', task)">
                 <i class="fa fa-trash"></i>
         </button>
     </li>
