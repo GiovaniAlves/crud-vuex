@@ -9,7 +9,7 @@
 
         <div class="container">
             <div class="col-sm-12">
-                <TaskList />
+                <TaskList/>
             </div>
         </div>
     </div>
@@ -17,18 +17,11 @@
 
 <script>
 
-import {mapState} from 'vuex'
-import TaskList from "./components/TaskList"
+import TaskList from "./resources/tasks/_components/TaskList"
 
 export default {
     name: 'App',
-    components: {TaskList},
-    computed: {
-        ...mapState(['contador'])
-    },
-    created() {
-        console.log(this.$store.state.contador)
-    }
+    components: {TaskList}
 }
 </script>
 

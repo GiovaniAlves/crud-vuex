@@ -9,8 +9,8 @@
                 <button
                     class="btn btn-primary float-right"
                     @click="displayFormCreateTask">
-                        <i class="fa fa-plus mr-2"></i>
-                        <span>Criar</span>
+                    <i class="fa fa-plus mr-2"></i>
+                    <span>Criar</span>
                 </button>
             </div>
         </div>
@@ -33,8 +33,13 @@
 </template>
 
 <script>
+
+import { createNamespacedHelpers } from "vuex"
+
 import TaskListItem from "./TaskListItem"
 import TaskSave from "./TaskSave"
+
+const {mapState} = createNamespacedHelpers('tasks')
 
 export default {
     name: "TaskList",
@@ -42,13 +47,14 @@ export default {
         TaskSave,
         TaskListItem
     },
+    computed: {
+        ...mapState(['tasks']),
+    },
+    created() {
+        console.log(`Store: `, this.$store)
+    },
     data() {
         return {
-            tasks: [
-                {id: 1, title: "Aprender Vue", concluded: true},
-                {id: 2, title: "Aprender Vuex", concluded: true},
-                {id: 3, title: "Aprender Vue Router", concluded: false},
-            ],
             displayForm: false,
             selectedTask: undefined
         }
@@ -61,11 +67,11 @@ export default {
             }
             this.displayForm = !this.displayForm
         },
-        selectTaskForEdit(task){
+        selectTaskForEdit(task) {
             this.displayForm = true
             this.selectedTask = task
         },
-        reset(){
+        reset() {
             this.displayForm = false
             this.selectedTask = undefined
         }

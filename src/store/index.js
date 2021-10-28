@@ -1,13 +1,8 @@
-import { createStore } from 'vuex'
+import {createStore} from 'vuex'
+import tasksModule from '@/resources/tasks/_store/'
 
 export default createStore({
-  state: {
-    contador: 0
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
+    modules: {
+        tasks: tasksModule
+    }
 })

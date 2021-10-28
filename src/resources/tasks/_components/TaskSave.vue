@@ -14,18 +14,20 @@
                             placeholder="Título da tarefa"
                             :value="task && task.title">
                     </div>
-                    <div class="col-sm-2" v-if="task">
-                        <div class="form-group">
-                            <label>Tarefa concluída?</label>
-                            <button
-                                type="button"
-                                class="btn btn-sm d-block"
-                                :class="classButton">
-                                    <i class="fa fa-check"></i>
-                            </button>
-                        </div>
+                </div>
+
+                <div class="col-sm-2" v-if="task">
+                    <div class="form-group">
+                        <label>Tarefa concluída?</label>
+                        <button
+                            type="button"
+                            class="btn btn-sm d-block"
+                            :class="classButton">
+                            <i class="fa fa-check"></i>
+                        </button>
                     </div>
                 </div>
+
             </div>
 
             <button type="submit" class="btn btn-primary">Salvar</button>
