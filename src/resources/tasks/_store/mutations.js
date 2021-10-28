@@ -2,6 +2,7 @@ import {
     CREATE_TASK,
     DELETE_TASK,
     LIST_TASKS,
+    SELECT_TASK,
     UPDATE_TASK
 } from "./mutation-types"
 
@@ -21,5 +22,8 @@ export default {
     [LIST_TASKS]: (state, {tasks}) => {
         /*Recebendo as tarefas da Fake API*/
         state.tasks = tasks
+    },
+    [SELECT_TASK]: (state, {task}) => {
+        state.selectedTask = task
     }
 }

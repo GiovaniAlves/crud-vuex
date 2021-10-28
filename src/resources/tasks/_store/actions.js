@@ -22,5 +22,11 @@ export default {
     listTasks: async ( { commit }) => {
         const response = await TasksService.getTasks()
         commit(types.LIST_TASKS, {tasks: response.data})
+    },
+    selectTask: ({ commit }, payload) => {
+        commit(types.SELECT_TASK, payload)
+    },
+    resetSelectedTask: ({ commit }) => {
+        commit(types.SELECT_TASK, { task: undefined})
     }
 }

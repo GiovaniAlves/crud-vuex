@@ -21,7 +21,7 @@
                 :key="task.id"
                 :task="task"
                 @edit="selectTaskForEdit"
-                @conclude="concludeTask({task})"
+                @conclude="concludeTask({ task })"
                 @delete="confirmTaskRemoval"/>
         </ul>
 
@@ -29,7 +29,8 @@
 
         <TaskSave
             v-if="displayForm"
-            :task="selectedTask"/>
+            :task="selectedTask"
+            @save="saveTask"/>
 
     </div>
 </template>
@@ -51,12 +52,11 @@ export default {
     },
     data() {
         return {
-            displayForm: false,
-            selectedTask: undefined
+            displayForm: false
         }
     },
     computed: {
-        ...mapState(['tasks']),
+        ...mapState(['tasks', 'selectedTask']),
     },
     created() {
         this.listTasks()
@@ -65,32 +65,44 @@ export default {
         ...mapActions([
             'concludeTask',
             'listTasks',
+            'createTask',
+            'deleteTask',
+            'selectTask',
+            'resetSelectedTask',
             'readTasks',
+            'updateTask'
         ]),
         confirmTaskRemoval(task){
             const confirm = window.confirm(`Deseja realmente deletar a tarefa ${task.title}?`)
             if (confirm)
-                this.deleteTask({task})
+                this.deleteTask({ task })
         },
         displayFormCreateTask() {
             if (this.selectedTask) {
-                this.selectedTask = undefined
+                this.resetSelectedTask()
                 return
             }
             this.displayForm = !this.displayForm
         },
+        saveTask(event){
+            switch (event.operation) {
+                case 'create':
+                    this.createTask({ task: event.task })
+                    break
+                case 'edit':
+                    this.updateTask({ task: event.task })
+                    break
+            }
+            this.reset()
+        },
         selectTaskForEdit(task) {
             this.displayForm = true
-            this.selectedTask = task
+            this.selectTask({ task })
         },
         reset() {
             this.displayForm = false
-            this.selectedTask = undefined
+            this.resetSelectedTask()
         }
     }
 }
 </script>
-
-<style scoped>
-
-</style>

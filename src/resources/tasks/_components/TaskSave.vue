@@ -12,18 +12,19 @@
                             type="text"
                             class="form-control"
                             placeholder="Título da tarefa"
-                            :value="task && task.title">
+                            v-model="task.title">
                     </div>
                 </div>
 
-                <div class="col-sm-2" v-if="task">
+                <div class="col-sm-2" v-if="selectedTask">
                     <div class="form-group">
                         <label>Tarefa concluída?</label>
                         <button
                             type="button"
                             class="btn btn-sm d-block"
-                            :class="classButton">
-                            <i class="fa fa-check"></i>
+                            :class="classButton"
+                            @click="task.concluded = !task.concluded">
+                                <i class="fa fa-check"></i>
                         </button>
                     </div>
                 </div>
@@ -36,30 +37,48 @@
 </template>
 
 <script>
+
+import { mapState } from 'vuex'
+
 export default {
     name: "TaskSave",
-    props: {
-        task: {
-            type: Object,
-            default: undefined
+    data() {
+        return {
+            task: {}
         }
     },
     computed: {
+        ...mapState('tasks', ['selectedTask']),
         classColumn() {
-            return this.task
+            return this.selectedTask
                 ? 'col-sm-10'
                 : 'col-sm-12'
         },
         classButton() {
-            return this.task && this.task.concluded
+            return this.selectedTask && this.task.concluded
                 ? 'btn-success'
                 : 'btn-secondary'
         }
     },
+    watch: {
+        selectedTask(newTask){
+            this.syncUp(newTask)
+        }
+    },
+    created() {
+        this.syncUp(this.selectedTask)
+    },
     methods: {
         save() {
-            const operation = !this.task ? 'create' : 'edit'
-            console.log(`Operação: ${operation}`)
+            /*Para obter a operação vou me basear na selectedTask global pq a tarfa local sempre terá um valor*/
+            const operation = !this.selectedTask ? 'create' : 'edit'
+            this.$emit('save', {operation, task: this.task})
+        },
+        syncUp(newTask){
+            this.task = Object.assign(
+                {},
+                newTask || { title: '', concluded: false }
+            )
         }
     }
 }
