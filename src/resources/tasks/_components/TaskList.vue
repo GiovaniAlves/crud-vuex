@@ -69,7 +69,6 @@ export default {
             'deleteTask',
             'selectTask',
             'resetSelectedTask',
-            'readTasks',
             'updateTask'
         ]),
         confirmTaskRemoval(task){
