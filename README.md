@@ -22,7 +22,7 @@ npm run build
 npm run lint
 ```
 
-### Running JSON Server to serve a fake REST API
+### To use the JSON Server to serve a fake REST API
 Use the command below inside the db directory
 ```
 npm start
